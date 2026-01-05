@@ -2,6 +2,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: vineeta-guestbook-frontend
+  namespace: grupp1
   labels:
     app: vineeta-guestbook
     tier: frontend
