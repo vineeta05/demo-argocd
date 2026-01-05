@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vineeta-redis
+  labels:
+    app: vineeta-guestbook
+    tier: cache
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+      protocol: TCP
+  selector:
+    app: vineeta-redis

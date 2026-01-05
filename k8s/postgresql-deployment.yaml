@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vineeta-postgresql
+  labels:
+    app: vineeta-guestbook
+    tier: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vineeta-postgresql
+  template:
+    metadata:
+      labels:
+        app: vineeta-postgresql
+        tier: database
+    spec:
+      containers:
+        - name: vineeta-postgresql
+          image: quay.io/fedora/postgresql-16:latest
+          ports:
+            - containerPort: 5432
+              name: postgres
+          env:
+            - name: POSTGRESQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRESQL_USER
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRESQL_PASSWORD
+            - name: POSTGRESQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRESQL_DATABASE
+          volumeMounts:
+            - name: postgresql-data
+              mountPath: /var/lib/pgsql/data
+          resources:
+            limits:
+              memory: 512Mi
+      volumes:
+        - name: postgresql-data
+          persistentVolumeClaim:
+            claimName: postgresql-pvc
