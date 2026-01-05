@@ -68,5 +68,6 @@ spec:
           resources:
             limits:
               memory: 256Mi
+              cpu: 200m
       imagePullSecrets:
         - name: ghcr-secret
