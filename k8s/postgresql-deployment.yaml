@@ -27,17 +27,17 @@ spec:
             - name: POSTGRESQL_USER
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
+                  name: vineeta-postgres-secret
                   key: POSTGRESQL_USER
             - name: POSTGRESQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
+                  name: vineeta-postgres-secret
                   key: POSTGRESQL_PASSWORD
             - name: POSTGRESQL_DATABASE
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
+                  name: vineeta-postgres-secret
                   key: POSTGRESQL_DATABASE
           volumeMounts:
             - name: postgresql-data
